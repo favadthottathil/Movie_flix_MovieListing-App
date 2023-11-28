@@ -1,5 +1,5 @@
-class TopRated {
-  TopRated({
+class TopRatedModel {
+  TopRatedModel({
     required this.backdropPath,
     required this.originalLanguage,
     required this.originalTitle,
@@ -20,7 +20,7 @@ class TopRated {
   late final double voteAverage;
   late final int voteCount;
 
-  TopRated.fromJson(Map<String, dynamic> json) {
+  TopRatedModel.fromJson(Map<String, dynamic> json) {
     backdropPath = json['backdrop_path'];
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];

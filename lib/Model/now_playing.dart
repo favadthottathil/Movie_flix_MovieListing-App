@@ -1,5 +1,5 @@
-class NowPlaying {
-  NowPlaying({
+class NowPlayingModel {
+  NowPlayingModel({
     required this.adult,
     required this.backdropPath,
     required this.originalLanguage,
@@ -25,14 +25,14 @@ class NowPlaying {
   late final int voteCount;
   
   // Constructor to create a NowPlaying object from JSON
-  NowPlaying.fromJson(Map<String, dynamic> json) {
+  NowPlayingModel.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
     popularity = json['popularity'];
-    posterPath = json['poster_path'];
+    posterPath =  json['poster_path'];
     releaseDate = json['release_date'];
     title = json['title'];
     voteAverage = json['vote_average'];

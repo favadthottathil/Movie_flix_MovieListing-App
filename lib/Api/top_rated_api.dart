@@ -15,7 +15,7 @@ class TopRatedApi {
 
   // Fetches data from the Now Playing API endpoint and returns
   // a list of NowPlaying objects.
-  Future<List<TopRated>> getDataFromTopRatedApi() async {
+  Future<List<TopRatedModel>> getDataFromTopRatedApi() async {
     final url = Uri.parse(apiEndPoint);
     try {
       // Fetch Data from Api using a GET Request
@@ -28,7 +28,7 @@ class TopRatedApi {
         List<dynamic> data = jsonResponse['results'];
 
         // Map the retrieved data to a list of NowPlaying objects
-        List<TopRated> topRated = data.map((item) => TopRated.fromJson(item)).toList();
+        List<TopRatedModel> topRated = data.map((item) => TopRatedModel.fromJson(item)).toList();
 
         return topRated;
       } else {
