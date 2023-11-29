@@ -1,14 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:movie_flix_app/Model/top_rated.dart';
+import 'package:movie_flix_app/provider/refresh_provider_top_rated.dart';
 import 'package:movie_flix_app/utils/app_style.dart';
 import 'package:movie_flix_app/utils/colors.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
+import 'package:provider/provider.dart';
 
 makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData, {bool showSearch = true}) {
   final size = MediaQuery.of(context).size;
+
+  Provider.of<RefreshProviderTopRated>(context,listen: false).setToallMovies = moviesData;
 
   return Column(
     children: [
@@ -16,7 +21,7 @@ makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData, {bool s
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           child: GestureDetector(
-            onTap: () => Navigator.pushNamed(context, '/searchmovies'),
+            onTap: () => Navigator.pushNamed(context, '/searchmoviesTopRated', arguments: moviesData),
             child: Container(
               width: size.width,
               padding: const EdgeInsets.all(16),
@@ -40,18 +45,41 @@ makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData, {bool s
             ),
           ),
         ),
-      Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: moviesData.length,
-          itemBuilder: (BuildContext context, int index) {
-            final movies = moviesData[index];
+      Consumer<RefreshProviderTopRated>(builder: (context, provier, child) {
+        return Expanded(
+          child: RefreshIndicator(
+            onRefresh: provier.refresh,
+            child: SlidableAutoCloseBehavior(
+              closeWhenOpened: true,
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: provier.allMovies.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final movies = provier.allMovies[index];
 
-            return makeCard(context, movies);
-          },
-        ),
-      ),
+                  return Slidable(
+                    key: Key(movies.title),
+                    endActionPane: ActionPane(
+                      dismissible: DismissiblePane(onDismissed: () => provier.reomoveData = index),
+                      motion: const BehindMotion(),
+                      children: [
+                        SlidableAction(
+                          backgroundColor: Colors.red,
+                          icon: Icons.delete,
+                          label: 'Delete',
+                          onPressed: (context) => provier.reomoveData = index,
+                        )
+                      ],
+                    ),
+                    child: makeCard(context, movies),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      }),
     ],
   );
 }
@@ -59,8 +87,8 @@ makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData, {bool s
 makeCard(BuildContext context, TopRatedModel movies) {
   final sizer = MediaQuery.of(context).size;
 
-  return InkWell(
-    onTap: () => Navigator.pushNamed(context, '/detailsPage') // Navigate To Details Page
+  return GestureDetector(
+    onTap: () => Navigator.pushNamed(context, '/detailspageTopRated', arguments: movies) // Navigate To Details Page
 
     ,
     child: Padding(

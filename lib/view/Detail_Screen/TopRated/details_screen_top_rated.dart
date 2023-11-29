@@ -1,20 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_flix_app/Model/now_playing.dart';
+import 'package:movie_flix_app/Model/top_rated.dart';
 import 'package:movie_flix_app/utils/app_style.dart';
 import 'package:movie_flix_app/utils/colors.dart';
 import 'package:movie_flix_app/utils/format_date.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
 import 'package:movie_flix_app/view/Detail_Screen/details_screen_widget.dart';
 
-class DetailsScreenNowPlaying extends StatelessWidget {
-  const DetailsScreenNowPlaying({super.key});
+class DetailsScreenTopRated extends StatelessWidget {
+  const DetailsScreenTopRated({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final movieData = ModalRoute.of(context)?.settings.arguments as NowPlayingModel;
+    final movieData = ModalRoute.of(context)?.settings.arguments as TopRatedModel;
 
     final size = MediaQuery.of(context).size;
 
