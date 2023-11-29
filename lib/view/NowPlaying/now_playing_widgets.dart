@@ -10,41 +10,50 @@ import 'package:movie_flix_app/utils/colors.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
 import 'package:provider/provider.dart';
 
-makeBodyofNowPlaying(BuildContext context, List<NowPlayingModel> moviesData, {bool showSearch = true}) {
+makeBodyofNowPlaying(BuildContext context, List<NowPlayingModel> moviesData) {
   final size = MediaQuery.of(context).size;
 
-  Provider.of<RefreshProviderNowPlaying>(context, listen: false).setToallMovies = moviesData;
+  // Updating Provider with fetched movie data
+  Provider.of<RefreshProviderNowPlaying>(
+    context,
+    listen: false,
+  ).setToallMovies = moviesData;
 
   return Column(
     children: [
-      if (showSearch)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          child: GestureDetector(
-            onTap: () => Navigator.pushNamed(context, '/searchmoviesNowPlayed', arguments: moviesData),
-            child: Container(
-              width: size.width,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: Row(
-                children: [
-                  const Icon(
-                    Iconsax.search_normal,
-                    color: whiteColor,
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    'Search Movies',
-                    style: AppStyle.poppins14,
-                  )
-                ],
-              ),
+
+      // Search Movies section
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(
+            context,
+            '/searchmoviesNowPlayed',
+            arguments: moviesData,
+          ),
+          child: Container(
+            width: size.width,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Iconsax.search_normal,
+                  color: whiteColor,
+                ),
+                const SizedBox(width: 20),
+                Text(
+                  'Search Movies',
+                  style: AppStyle.poppins14,
+                )
+              ],
             ),
           ),
         ),
+      ),
       Consumer<RefreshProviderNowPlaying>(
         builder: (context, provider, child) {
           return Expanded(
@@ -75,8 +84,6 @@ makeBodyofNowPlaying(BuildContext context, List<NowPlayingModel> moviesData, {bo
                       ),
                       child: makeCard(context, movies),
                     );
-
-                    // return makeCard(context, movies);
                   },
                 ),
               ),

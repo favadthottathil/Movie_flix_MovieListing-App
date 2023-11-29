@@ -10,41 +10,40 @@ import 'package:movie_flix_app/utils/colors.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
 import 'package:provider/provider.dart';
 
-makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData, {bool showSearch = true}) {
+makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData) {
   final size = MediaQuery.of(context).size;
 
-  Provider.of<RefreshProviderTopRated>(context,listen: false).setToallMovies = moviesData;
+  Provider.of<RefreshProviderTopRated>(context, listen: false).setToallMovies = moviesData;
 
   return Column(
     children: [
-      if (showSearch)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          child: GestureDetector(
-            onTap: () => Navigator.pushNamed(context, '/searchmoviesTopRated', arguments: moviesData),
-            child: Container(
-              width: size.width,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: Row(
-                children: [
-                  const Icon(
-                    Iconsax.search_normal,
-                    color: whiteColor,
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    'Search Movies',
-                    style: AppStyle.poppins14,
-                  )
-                ],
-              ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, '/searchmoviesTopRated', arguments: moviesData),
+          child: Container(
+            width: size.width,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Iconsax.search_normal,
+                  color: whiteColor,
+                ),
+                const SizedBox(width: 20),
+                Text(
+                  'Search Movies',
+                  style: AppStyle.poppins14,
+                )
+              ],
             ),
           ),
         ),
+      ),
       Consumer<RefreshProviderTopRated>(builder: (context, provier, child) {
         return Expanded(
           child: RefreshIndicator(

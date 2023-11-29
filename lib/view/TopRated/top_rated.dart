@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:movie_flix_app/Api/top_rated_api.dart';
 import 'package:movie_flix_app/utils/colors.dart';
-import 'package:movie_flix_app/view/NowPlaying/now_playing_widgets.dart';
 import 'package:movie_flix_app/view/TopRated/top_rated_widgets.dart';
 
 class TopRated extends StatefulWidget {

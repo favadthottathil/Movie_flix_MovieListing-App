@@ -3,7 +3,7 @@ import 'package:movie_flix_app/Model/now_playing.dart';
 import 'package:movie_flix_app/provider/search_provider_now_playing.dart';
 import 'package:movie_flix_app/utils/app_style.dart';
 import 'package:movie_flix_app/utils/colors.dart';
-import 'package:movie_flix_app/view/NowPlaying/now_playing_widgets.dart';
+import 'package:movie_flix_app/view/Search_Movies/Nowplaying/now_playing_widgets.dart';
 import 'package:provider/provider.dart';
 
 class SearchMoviesNowPlaying extends StatefulWidget {
@@ -22,7 +22,7 @@ class _SearchMoviesState extends State<SearchMoviesNowPlaying> {
 
     Provider.of<SearchProviderNowPlaying>(context, listen: false).toFilteredMovies = movieData;
 
-    filteredMovies = movieData;
+    // filteredMovies = movieData;
     return Consumer<SearchProviderNowPlaying>(builder: (context, provider, child) {
       return Scaffold(
         backgroundColor: primaryColor,
@@ -47,7 +47,7 @@ class _SearchMoviesState extends State<SearchMoviesNowPlaying> {
             },
           ),
         ),
-        body: makeBodyofNowPlaying(context, provider.filteredMovies, showSearch: false),
+        body: makeBodyofNowPlayingSearch(context, provider.filteredMovies),
         // body: SizedBox(),
       );
     });

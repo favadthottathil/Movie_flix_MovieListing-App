@@ -12,10 +12,14 @@ class NavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<NavigationBarProvider>(builder: (context, provider, child) {
+
+        // Display the current screen based on the selected index.
         return provider.screen[provider.selectedIndex];
       }),
       bottomNavigationBar: Consumer<NavigationBarProvider>(
         builder: (context, provider, child) {
+
+          // Configures the bottom navigation bar appearence and functionality.
           return NavigationBarTheme(
             data: NavigationBarThemeData(
               labelTextStyle: MaterialStatePropertyAll(AppStyle.bottomNavBarColor),
@@ -26,8 +30,12 @@ class NavigationMenu extends StatelessWidget {
               height: 60,
               elevation: 0,
               selectedIndex: provider.selectedIndex,
+
+              // Change the selected index when change tab.
               onDestinationSelected: (index) => provider.changeIndex = index,
               destinations: const [
+
+                // Define Navigation Icon and Labels.
                 NavigationDestination(
                   icon: Icon(Iconsax.clipboard),
                   label: 'Now Playing',

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // Use for initializing provider
+    // Use for initializing provider.
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<NavigationBarProvider>(create: (_) => NavigationBarProvider()),
@@ -37,9 +37,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: primaryColor, // Set primary color for the app
+          primaryColor: primaryColor, // Set primary color for the app.
         ),
-        initialRoute: '/', // Set the initial route when app starts
+        initialRoute: '/', // Set the initial route when app starts.
+
+        // List of Screens.
         routes: {
           '/': (context) => const NavigationMenu(),
           'nowplaying': (context) => const NowPlaying(),
