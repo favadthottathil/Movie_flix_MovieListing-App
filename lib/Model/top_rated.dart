@@ -9,6 +9,7 @@ class TopRatedModel {
     required this.title,
     required this.voteAverage,
     required this.voteCount,
+    required this.popularity,
   });
   late final String backdropPath;
   late final String originalLanguage;
@@ -19,6 +20,7 @@ class TopRatedModel {
   late final String title;
   late final double voteAverage;
   late final int voteCount;
+  late final double popularity;
 
   TopRatedModel.fromJson(Map<String, dynamic> json) {
     backdropPath = json['backdrop_path'];
@@ -30,5 +32,6 @@ class TopRatedModel {
     title = json['title'];
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
+    popularity = json['popularity'];
   }
 }

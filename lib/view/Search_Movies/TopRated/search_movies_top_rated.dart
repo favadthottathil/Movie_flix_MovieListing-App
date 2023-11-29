@@ -3,9 +3,7 @@ import 'package:movie_flix_app/Model/top_rated.dart';
 import 'package:movie_flix_app/provider/search_provider_top_rated.dart';
 import 'package:movie_flix_app/utils/app_style.dart';
 import 'package:movie_flix_app/utils/colors.dart';
-import 'package:movie_flix_app/view/NowPlaying/now_playing_widgets.dart';
 import 'package:movie_flix_app/view/Search_Movies/TopRated/top_rated.dart';
-import 'package:movie_flix_app/view/TopRated/top_rated_widgets.dart';
 import 'package:provider/provider.dart';
 
 class SearchMoviesTopRated extends StatefulWidget {

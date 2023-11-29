@@ -13,11 +13,9 @@ class SearchProviderTopRated extends ChangeNotifier {
   void updateList(String value, List<TopRatedModel> moviedata) {
     _filteredMovies = moviedata
         .where(
-          (element) => element.title.toLowerCase().startsWith(value),
+          (element) => element.title.toLowerCase().contains(value.toLowerCase()),
         )
         .toList();
-
-    
 
     notifyListeners();
   }

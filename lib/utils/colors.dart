@@ -6,4 +6,8 @@ const whiteColor = Colors.white;
 
 const blackColor = Colors.black;
 
+const greyColor = Colors.grey;
+
 const listViewBackground = Color.fromRGBO(64, 75, 96, .9);
+
+const lightBlack = Colors.black54;

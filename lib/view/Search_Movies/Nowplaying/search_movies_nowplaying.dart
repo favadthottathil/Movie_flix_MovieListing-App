@@ -6,15 +6,8 @@ import 'package:movie_flix_app/utils/colors.dart';
 import 'package:movie_flix_app/view/Search_Movies/Nowplaying/now_playing_widgets.dart';
 import 'package:provider/provider.dart';
 
-class SearchMoviesNowPlaying extends StatefulWidget {
+class SearchMoviesNowPlaying extends StatelessWidget {
   const SearchMoviesNowPlaying({super.key});
-
-  @override
-  State<SearchMoviesNowPlaying> createState() => _SearchMoviesState();
-}
-
-class _SearchMoviesState extends State<SearchMoviesNowPlaying> {
-  List<NowPlayingModel> filteredMovies = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +15,6 @@ class _SearchMoviesState extends State<SearchMoviesNowPlaying> {
 
     Provider.of<SearchProviderNowPlaying>(context, listen: false).toFilteredMovies = movieData;
 
-    // filteredMovies = movieData;
     return Consumer<SearchProviderNowPlaying>(builder: (context, provider, child) {
       return Scaffold(
         backgroundColor: primaryColor,
@@ -48,7 +40,6 @@ class _SearchMoviesState extends State<SearchMoviesNowPlaying> {
           ),
         ),
         body: makeBodyofNowPlayingSearch(context, provider.filteredMovies),
-        // body: SizedBox(),
       );
     });
   }

@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_flix_app/Model/top_rated.dart';
 import 'package:movie_flix_app/utils/app_style.dart';
 import 'package:movie_flix_app/utils/colors.dart';
+import 'package:movie_flix_app/utils/find_popularity.dart';
 import 'package:movie_flix_app/utils/format_date.dart';
+import 'package:movie_flix_app/utils/sizedboxes_const.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
 import 'package:movie_flix_app/view/Detail_Screen/details_screen_widget.dart';
 
@@ -36,7 +38,7 @@ class DetailsScreenTopRated extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
-                        color: Colors.black54,
+                        color: lightBlack,
                         width: size.width,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -55,17 +57,17 @@ class DetailsScreenTopRated extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         SvgPicture.asset('Assets/crown.svg', color: whiteColor),
-                                        const SizedBox(width: 10),
-                                        Text('46%', style: AppStyle.poppins14),
+                                        sizedbW10,
+                                        Text('${findPopularityTopRated(movieData.popularity)}%', style: AppStyle.poppins14),
                                       ],
                                     ),
                                   ),
                                   const Icon(Icons.alarm, color: whiteColor),
-                                  const SizedBox(width: 10),
+                                  sizedbW10,
                                   Text('2 hr 36 mins', style: AppStyle.poppins14),
                                 ],
                               ),
-                              const SizedBox(height: 10),
+                              sizedbH10,
                               Text(
                                 movieData.overview,
                                 style: AppStyle.poppinsbold14,

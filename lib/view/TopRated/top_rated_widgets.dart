@@ -2,17 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:movie_flix_app/Model/top_rated.dart';
 import 'package:movie_flix_app/provider/refresh_provider_top_rated.dart';
 import 'package:movie_flix_app/utils/app_style.dart';
 import 'package:movie_flix_app/utils/colors.dart';
+import 'package:movie_flix_app/utils/icons_const.dart';
+import 'package:movie_flix_app/utils/sizedboxes_const.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
 import 'package:provider/provider.dart';
 
 makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData) {
   final size = MediaQuery.of(context).size;
 
+  // Updating Provider with fetched data
   Provider.of<RefreshProviderTopRated>(context, listen: false).setToallMovies = moviesData;
 
   return Column(
@@ -20,21 +22,22 @@ makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData) {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         child: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/searchmoviesTopRated', arguments: moviesData),
+          onTap: () => Navigator.pushNamed(
+            context,
+            '/searchmoviesTopRated',
+            arguments: moviesData,
+          ), // Navigate Search Screen
           child: Container(
             width: size.width,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.grey),
+              border: Border.all(color: greyColor),
             ),
             child: Row(
               children: [
-                const Icon(
-                  Iconsax.search_normal,
-                  color: whiteColor,
-                ),
-                const SizedBox(width: 20),
+                searchIconWhite,
+                sizedbW20,
                 Text(
                   'Search Movies',
                   style: AppStyle.poppins14,
@@ -44,8 +47,11 @@ makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData) {
           ),
         ),
       ),
+
+      // Display data
       Consumer<RefreshProviderTopRated>(builder: (context, provier, child) {
         return Expanded(
+          // Refresh for new data
           child: RefreshIndicator(
             onRefresh: provier.refresh,
             child: SlidableAutoCloseBehavior(
@@ -60,7 +66,9 @@ makeBodyofTopRated(BuildContext context, List<TopRatedModel> moviesData) {
                   return Slidable(
                     key: Key(movies.title),
                     endActionPane: ActionPane(
-                      dismissible: DismissiblePane(onDismissed: () => provier.reomoveData = index),
+                      dismissible: DismissiblePane(
+                        onDismissed: () => provier.reomoveData = index,
+                      ),
                       motion: const BehindMotion(),
                       children: [
                         SlidableAction(
@@ -99,18 +107,21 @@ makeCard(BuildContext context, TopRatedModel movies) {
           children: [
             SizedBox(
               height: sizer.height * 0.2,
+              width: sizer.width * 0.266,
               child: CachedNetworkImage(
-                imageUrl: '$moviePosterUrl${movies.posterPath}',
+                imageUrl: '$moviePosterUrl${movies.posterPath}', // Show movie poster
                 placeholder: (context, url) => const Center(
-                  child: SpinKitCircle(color: Colors.black),
+                  child: SpinKitCircle(
+                    color: blackColor,
+                  ), // Show placer holder while loading poster
                 ),
               ),
             ),
-            SizedBox(width: sizer.width * 0.02),
+            sizedbW10, // Sized box width 10
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 10),
+                sizedbH10, // Sized box height 10
                 SizedBox(
                   width: sizer.width * 0.6,
                   child: Text(

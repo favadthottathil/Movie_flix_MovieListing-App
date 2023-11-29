@@ -1,12 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_flix_app/Model/now_playing.dart';
-import 'package:movie_flix_app/Model/top_rated.dart';
 import 'package:movie_flix_app/utils/app_style.dart';
 import 'package:movie_flix_app/utils/colors.dart';
+import 'package:movie_flix_app/utils/find_popularity.dart';
 import 'package:movie_flix_app/utils/format_date.dart';
+import 'package:movie_flix_app/utils/sizedboxes_const.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
 import 'package:movie_flix_app/view/Detail_Screen/details_screen_widget.dart';
 
@@ -15,17 +14,18 @@ class DetailsScreenNowPlaying extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // passed parameter
     final movieData = ModalRoute.of(context)?.settings.arguments as NowPlayingModel;
 
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: primaryColor, // Set primary color as background color
       appBar: const AppBarScreen(),
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: NetworkImage('$backdropPosterUrl${movieData.backdropPath}'),
+          image: NetworkImage('$backdropPosterUrl${movieData.backdropPath}'), // Set backdrop image
           fit: BoxFit.cover,
         )),
         child: FutureBuilder(
@@ -39,7 +39,7 @@ class DetailsScreenNowPlaying extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
-                        color: Colors.black54,
+                        color: lightBlack,
                         width: size.width,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -47,7 +47,7 @@ class DetailsScreenNowPlaying extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(movieData.title, style: AppStyle.poppinsbold15),
-                              const SizedBox(height: 25),
+                              sizedbH25, // sized box height 25
                               Text(
                                 formateDate(movieData.releaseDate),
                                 style: AppStyle.poppinsbold14,
@@ -57,18 +57,22 @@ class DetailsScreenNowPlaying extends StatelessWidget {
                                   Expanded(
                                     child: Row(
                                       children: [
+                                        // ignore: deprecated_member_use
                                         SvgPicture.asset('Assets/crown.svg', color: whiteColor),
-                                        const SizedBox(width: 10),
-                                        Text('46%', style: AppStyle.poppins14),
+                                        sizedbW10,
+                                        Text(
+                                          '${findPopularityNowPlaying(movieData.popularity)}%',
+                                          style: AppStyle.poppins14,
+                                        ),
                                       ],
                                     ),
                                   ),
                                   const Icon(Icons.alarm, color: whiteColor),
-                                  const SizedBox(width: 10),
+                                  sizedbH10,
                                   Text('2 hr 36 mins', style: AppStyle.poppins14),
                                 ],
                               ),
-                              const SizedBox(height: 10),
+                              sizedbH10,
                               Text(
                                 movieData.overview,
                                 style: AppStyle.poppinsbold14,

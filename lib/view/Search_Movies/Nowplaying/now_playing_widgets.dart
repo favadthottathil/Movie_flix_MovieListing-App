@@ -7,10 +7,7 @@ import 'package:movie_flix_app/utils/colors.dart';
 import 'package:movie_flix_app/utils/url_const.dart';
 
 makeBodyofNowPlayingSearch(BuildContext context, List<NowPlayingModel> moviesData) {
-  // Provider.of<RefreshProviderNowPlaying>(context, listen: false).setToallMovies = moviesData;
-
   return ListView.builder(
-    scrollDirection: Axis.vertical,
     shrinkWrap: true,
     itemCount: moviesData.length,
     itemBuilder: (BuildContext context, int index) {
@@ -74,34 +71,4 @@ makeCard(BuildContext context, NowPlayingModel movies) {
       ),
     ),
   );
-}
-
-class AppBarNowPlaying extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  final Size preferredSize;
-
-  const AppBarNowPlaying({Key? key})
-      : preferredSize = const Size.fromHeight(56.0),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: primaryColor,
-      title: InkWell(
-        onTap: () {},
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.amber,
-        ),
-        // borderRadius: BorderRadius.circular(24),
-      ),
-      // leading: IconButton(
-      //   icon: const Icon(Icons.arrow_back_ios),
-      //   onPressed: () => Navigator.of(context).pop(),
-      // ),
-      // automaticallyImplyLeading: true,
-    );
-  }
 }
