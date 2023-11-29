@@ -6,8 +6,19 @@ class SearchProvider extends ChangeNotifier {
 
   List<NowPlayingModel> get filteredMovies => _filteredMovies;
 
-  filterMovies(String searchText, List<NowPlayingModel> movies) {
-    _filteredMovies = movies.where((movie) => movie.title.toLowerCase() == searchText.toLowerCase()).toList();
+  set toFilteredMovies(List<NowPlayingModel> movieData) {
+    _filteredMovies = movieData;
+  }
+
+  void updateList(String value, List<NowPlayingModel> moviedata) {
+    _filteredMovies = moviedata
+        .where(
+          (element) => element.title.toLowerCase().startsWith(value),
+        )
+        .toList();
+
+    
+
     notifyListeners();
   }
 }
